@@ -5,9 +5,10 @@ import {HttpModule} from '@angular/http';
 
 import {RoutesDemoApp} from './app.component';
 import {Routes, RouterModule} from "@angular/router";
-import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
-import { ContactComponent } from './contact/contact.component';
+import {HomeComponent} from './home/home.component';
+import {AboutComponent} from './about/about.component';
+import {ContactComponent} from './contact/contact.component';
+import {LocationStrategy, HashLocationStrategy, APP_BASE_HREF} from "@angular/common";
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -30,7 +31,10 @@ const routes: Routes = [
     HttpModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
+    {provide: APP_BASE_HREF, useValue: '/'}
+  ],
   bootstrap: [RoutesDemoApp]
 })
 export class AppModule {
